@@ -9,7 +9,7 @@ class Ability:
 Deals {str(self.attack)}x damage
 Heals for {str(self.heal)}x your attack""")
     def __str__(self):
-        return self.__repr__()
+        return str(self.__repr__())
 class Passive:
     def __init__(self,atk,hp,defence,mana):
         self.atk = atk
