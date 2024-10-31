@@ -42,3 +42,10 @@ def strput(text):
 
 def line():
     return "-----------------------"
+
+def rng(dc=None):
+    randomizedber = random.random()
+    if dc != None:
+        return randomizedber <= dc
+    else: 
+        return randomizedber

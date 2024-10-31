@@ -1,13 +1,17 @@
 class Ability:
-    def __init__(self,name,atk=0,heal=0,cost=0):
+    def __init__(self,name,atk=0,heal=0,cost=0,special=None):
         self.name = name
         self.attack = atk
         self.heal = heal
         self.cost = cost
+        self.special = special
     def __repr__(self):
-        return str(f"""{self.name} - Costs {str(self.cost)} Mana
+        returner = str(f"""{self.name} - Costs {str(self.cost)} Mana
 Deals {str(self.attack)}x damage
 Heals for {str(self.heal)}x your attack""")
+        if self.special != None:
+            returner += f"\nSpecial: {self.special}"
+        return str(returner)
     def __str__(self):
         return str(self.__repr__())
 class Passive:
