@@ -4,6 +4,12 @@ class Ability:
         self.attack = atk
         self.heal = heal
         self.cost = cost
+    
+    def __repr__(self):
+        return str(f"""{line()}
+{self.name} - Costs {str(self.cost)} mana
+{line()}
+Doe""")
 class Passive:
     def __init__(self,atk,hp,defence,mana):
         self.atk = atk
