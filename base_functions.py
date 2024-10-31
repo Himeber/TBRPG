@@ -38,7 +38,7 @@ def intput(text):
 def strput(text):
     timeprint(text)
     ans = input("> ")
-    return str(ans)
+    return str(ans).lower()
 
 def line():
     return "-----------------------"

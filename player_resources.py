@@ -1,15 +1,7 @@
 from base_functions import *
-from paths import (Student)
+from paths import *
 from abilities_spells import *
-class Spellbook:
-    def __init__(self,name=""):
-        self.name = name
-        self.abilites = {
-
-        }
-
-    def addability(self,ability):
-        self.abilites[ability.name] = ability
+from items import *
 
 class Player:
     def __init__(self,name):
@@ -39,6 +31,8 @@ class Player:
         self.ring1 = None
         self.ring2 = None
         self.pendant = None
+        self.inv = [None,None,None,None,None,None,None,None,None]
+        self.moneys = 0.00
 
     def __repr__(self):
         return str(f"""{line()}
@@ -68,21 +62,55 @@ Attack: {str(self.atk)} | Defence : {str(self.defence)}
                 else:
                     pass
         if self.ring1:
-            pass
+            hp += self.ring1.hp 
+            attack += self.ring1.atk
+            defence += self.ring1.defence
+            mana += self.ring1.mana
         if self.ring2:
-            pass
+            hp += self.ring2.hp 
+            attack += self.ring2.atk
+            defence += self.ring2.defence
+            mana += self.ring2.mana
         if self.boots:
-            pass
+            hp += self.boots.hp 
+            attack += self.boots.atk
+            defence += self.boots.defence
+            mana += self.boots.mana
         if self.chest:
-            pass
+            hp += self.chest.hp 
+            attack += self.chest.atk
+            defence += self.chest.defence
+            mana += self.chest.mana
         if self.gloves:
-            pass
+            hp += self.gloves.hp 
+            attack += self.gloves.atk
+            defence += self.gloves.defence
+            mana += self.gloves.mana
         if self.helmet:
-            pass
+            hp += self.helmet.hp 
+            attack += self.helmet.atk
+            defence += self.helmet.defence
+            mana += self.helmet.mana
         if self.pendant:
-            pass
+            hp += self.pendant.hp 
+            attack += self.pendant.atk
+            defence += self.pendant.defence
+            mana += self.pendant.mana
         if self.legs:
-            pass
+            hp += self.legs.hp 
+            attack += self.legs.atk
+            defence += self.legs.defence
+            mana += self.legs.mana
+        self.maxhp = hp
+        self.atk = attack
+        self.defence = defence
+        self.maxmana = mana
+        for skill in abilites:
+            if skill not in self.abilities:
+                self.abilities.append(skill)
 
-player = Player("bob")
-player.refreshAbilities()
+    def showabilites(self):
+        print(line())
+        for skill in self.abilites:
+            timeprint(skill)
+            print(line())
