@@ -25,3 +25,4 @@ while True:
         timeprint("You rest for a while.")
     elif action == 'c' or "character":
         timeprint(str(you))
+pass
