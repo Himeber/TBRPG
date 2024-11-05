@@ -3,6 +3,7 @@ from items import *
 from paths import *
 from base_functions import *
 from combat import *
+from exploration import *
 cs()
 global you
 name = strput("What's your name?").title()
@@ -22,3 +23,5 @@ while True:
         explore()
     elif action == 'rest' or 'r':
         timeprint("You rest for a while.")
+    elif action == 'c' or "character":
+        timeprint(str(you))

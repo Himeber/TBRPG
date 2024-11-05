@@ -1,3 +1,4 @@
+from base_functions import *
 class Ability:
     def __init__(self,name,atk=0,heal=0,cost=0,special=None):
         self.name = name
@@ -33,3 +34,13 @@ class Passive:
         return returner
     def __str__(self):
         return self.__repr__()
+
+class EnemyAbility:
+    def __init__(self,name,damage,healing,priority,other = None):
+        self.name = name
+        self.dmg = damage
+        self.heal = healing
+        self.priority = priority
+        self.other = other
+    def __repr__(self) -> str:
+        return str(f"{self.name} - Priority {self.priority}\n{line()}\nDamage: {str(self.dmg)}x attack stat\nHeals for {str(self.heal)}x attack stat\nSpecial: {str(self.other)}\n{line()}")
