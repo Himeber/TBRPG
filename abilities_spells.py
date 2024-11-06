@@ -16,11 +16,12 @@ Heals for {str(self.heal)}x your attack""")
     def __str__(self):
         return str(self.__repr__())
 class Passive:
-    def __init__(self,atk,hp,defence,mana):
+    def __init__(self,atk,hp,defence,mana,matk):
         self.atk = atk
         self.hp = hp
         self.defence = defence
         self.mana = mana
+        self.matk = matk
     def __repr__(self):
         returner = ""
         if self.atk > 0:
@@ -30,7 +31,9 @@ class Passive:
         if self.defence > 0:
             returner += f"+{str(self.defence)} DEF "
         if self.mana > 0:
-            returner += f"+{str(self.mana)} Mana"
+            returner += f"+{str(self.mana)} Mana "
+        if self.matk > 0:
+            returner += f"+{str(self.matk)} Magic ATK"
         return returner
     def __str__(self):
         return self.__repr__()

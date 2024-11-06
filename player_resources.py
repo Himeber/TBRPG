@@ -17,6 +17,8 @@ class Player:
         self.baseatk = 10
         self.basedefence = 0
         self.basemana = 100
+        self.matk = 10
+        self.basematk = 10
         self.xp = 0
         self.xpneeded = 1
         self.level = 0
@@ -40,7 +42,7 @@ class Player:
 {line()}
 {str(self.xp)}/{str(self.xpneeded)} to the next level
 HP: {str(self.hp)}/{str(self.maxhp)} | Mana: {str(self.mana)}/{str(self.maxmana)}
-Attack: {str(self.atk)} | Defence : {str(self.defence)}
+Attack: {str(self.atk)} | Defence : {str(self.defence)} | Magic Attack: {str(self.matk)}
 {line()}""")
 
     def refresh(self):
@@ -49,6 +51,7 @@ Attack: {str(self.atk)} | Defence : {str(self.defence)}
         attack = self.baseatk
         defence = self.basedefence
         mana = self.basemana
+        matk = self.basematk
         for i in self.path.leveling:
             if i <= self.level:
                 skill = self.path.leveling[i]
@@ -59,6 +62,7 @@ Attack: {str(self.atk)} | Defence : {str(self.defence)}
                     attack += skill.atk
                     defence += skill.defence
                     mana += skill.mana
+                    matk += skill.matk
                 else:
                     pass
         if self.ring1:
@@ -66,45 +70,54 @@ Attack: {str(self.atk)} | Defence : {str(self.defence)}
             attack += self.ring1.atk
             defence += self.ring1.defence
             mana += self.ring1.mana
+            matk += self.ring1.matk
         if self.ring2:
             hp += self.ring2.hp 
             attack += self.ring2.atk
             defence += self.ring2.defence
             mana += self.ring2.mana
+            matk += self.ring2.matk
         if self.boots:
             hp += self.boots.hp 
             attack += self.boots.atk
             defence += self.boots.defence
             mana += self.boots.mana
+            matk += self.boots.matk
         if self.chest:
             hp += self.chest.hp 
             attack += self.chest.atk
             defence += self.chest.defence
             mana += self.chest.mana
+            matk += self.chest.matk
         if self.gloves:
             hp += self.gloves.hp 
             attack += self.gloves.atk
             defence += self.gloves.defence
             mana += self.gloves.mana
+            matk += self.gloves.matk
         if self.helmet:
             hp += self.helmet.hp 
             attack += self.helmet.atk
             defence += self.helmet.defence
             mana += self.helmet.mana
+            matk += self.helmet.matk
         if self.pendant:
             hp += self.pendant.hp 
             attack += self.pendant.atk
             defence += self.pendant.defence
             mana += self.pendant.mana
+            matk += self.pendant.matk
         if self.legs:
             hp += self.legs.hp 
             attack += self.legs.atk
             defence += self.legs.defence
             mana += self.legs.mana
+            matk += self.legs.matk
         self.maxhp = hp
         self.atk = attack
         self.defence = defence
         self.maxmana = mana
+        self.matk = matk
         for skill in abilites:
             if skill not in self.abilities:
                 self.abilities.append(skill)
@@ -114,3 +127,14 @@ Attack: {str(self.atk)} | Defence : {str(self.defence)}
         for skill in self.abilites:
             timeprint(skill)
             print(line())
+
+    def use(self,ability):
+        dmg = self.matk * ability.attack
+        dmg = dmg * (random.random() + 0.5)
+        dmg = int(dmg)
+        heal = self.matk * ability.heal
+        heal = heal * (random.random() +0.5)
+        heal = int(heal)
+        if self.maxhp - self.hp < heal:
+            heal = self.maxhp - self.hp
+        return dmg,heal
