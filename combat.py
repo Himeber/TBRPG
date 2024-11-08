@@ -43,5 +43,17 @@ def combat(enemy):
             else:
                 timeprint("Use '(a)ttack' to attack, or use 'cast ___' to cast an ability.")
                 timeprint("Use '(l)ist' to look at available abilities.")
+        timeprint(f"It's the {enemy.name}'s turn.")
+        dmg = enemy.atk * (random.random() + 0.5)
+        dmg -= you.defence
+        dmg = int(dmg)
+        if dmg < 0:
+            dmg = 0
+        timeprint(f"The {enemy.name} dealt {dmg} to you.")
+        you.hp -= dmg
+    if you.hp <= 0:
+        timeprint("You have died.")
+    if enemy.hp <= 0:
+        timeprint(f"The {enemy.name} has died.")
 def bosscombat(enemy):
     pass
