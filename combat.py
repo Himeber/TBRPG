@@ -19,6 +19,7 @@ def combat(enemy):
                 timeprint("You dealt " + str(dmg) + ".")
                 turn = False
             elif "cast" in action:
+                casted = False
                 caster = action[5:]
                 for i in you.abilities:
                     if caster == i.name:
@@ -35,7 +36,10 @@ def combat(enemy):
                         if cost > 0:
                             you.mana -= cost
                         turn = False
-                if i not in you.abilities:
+                        casted = True
+                      else:
+                          timeprint(f"You do not have enough mana to cast {caster}.")
+                if not casted:
                     timeprint(f"You cannot use {caster} because you do not know it.")
             elif action == "l" or "list":
                 for i in you.abilities:
@@ -43,5 +47,12 @@ def combat(enemy):
             else:
                 timeprint("Use '(a)ttack' to attack, or use 'cast ___' to cast an ability.")
                 timeprint("Use '(l)ist' to look at available abilities.")
+        cs()
+        print(you)
+        timeprint("It's the enemy's turn.")
+        dmg = enemy.attack(you)
+        timeprint(f"The {enemy.name} hit you for {dmg} damage!")
+        you.hp -= dmg
+        turn = True
 def bosscombat(enemy):
     pass

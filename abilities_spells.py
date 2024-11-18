@@ -22,6 +22,18 @@ class Passive:
         self.defence = defence
         self.mana = mana
         self.matk = matk
+        returner = ""
+        if self.atk > 0:
+            returner += f"+{str(self.atk)} ATK "
+        if self.hp > 0:
+            returner += f"+{str(self.hp)} HP "
+        if self.defence > 0:
+            returner += f"+{str(self.defence)} DEF "
+        if self.mana > 0:
+            returner += f"+{str(self.mana)} Mana "
+        if self.matk > 0:
+            returner += f"+{str(self.matk)} Magic ATK"
+        self.name = returner
     def __repr__(self):
         returner = ""
         if self.atk > 0:
