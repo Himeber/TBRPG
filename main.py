@@ -4,6 +4,7 @@ from paths import *
 from base_functions import *
 from combat import *
 from exploration import *
+from enemy import *
 cs()
 global you
 name = strput("What's your name?").title()
@@ -17,12 +18,12 @@ while True:
         timeprint("(H)elp")
         timeprint("(E)xplore")
         timeprint("(R)est")
-        timeprint("(C)haracter")
         timeprint("All commands can be used by typing the letters in parentheses.")
-    elif action == 'explore' or "e":
-        explore()
-    elif action == 'rest' or 'r':
+    elif action == 'explore' or action == "e":
+        you = explore()
+    elif action == 'rest' or action == 'r':
         timeprint("You rest for a while.")
-    elif action == 'c' or "character":
-        timeprint(str(you))
-pass
+    elif action == 'test':
+        you = combat(Enemy("bob",15,5,2),you)
+    else:
+        timeprint("That didn't work. Type (H)elp to see commands.")

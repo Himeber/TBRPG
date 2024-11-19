@@ -1,6 +1,5 @@
 from base_functions import *
-def combat(enemy):
-    global you
+def combat(enemy,you):
     turn = True
     cs()
     print(you)
@@ -16,7 +15,7 @@ def combat(enemy):
                 dmg = int(you.atk * (random.random() + 0.5) - enemy.defence)
                 enemy.damage(dmg)
                 timeprint("You attacked!")
-                timeprint("You dealt " + str(dmg) + ".")
+                timeprint(f"You dealt {dmg} dmg to the {enemy.name}.")
                 turn = False
             elif "cast" in action:
                 casted = False
@@ -41,18 +40,32 @@ def combat(enemy):
                           timeprint(f"You do not have enough mana to cast {caster}.")
                 if not casted:
                     timeprint(f"You cannot use {caster} because you do not know it.")
-            elif action == "l" or "list":
+            elif action == "l" or action == "list":
                 for i in you.abilities:
                     timeprint(f"{i.name} - Costs {i.cost} mana")
             else:
                 timeprint("Use '(a)ttack' to attack, or use 'cast ___' to cast an ability.")
                 timeprint("Use '(l)ist' to look at available abilities.")
-        cs()
-        print(you)
-        timeprint("It's the enemy's turn.")
-        dmg = enemy.attack(you)
-        timeprint(f"The {enemy.name} hit you for {dmg} damage!")
-        you.hp -= dmg
-        turn = True
+        if enemy.hp > 0:
+            cs()
+            print(enemy)
+            timeprint("It's the enemy's turn.")
+            dmg = enemy.attack(you)
+            timeprint(f"The {enemy.name} hit you for {dmg} damage!")
+            you.hp -= dmg
+            turn = True
+    if you.hp <= 0:
+        timeprint("You were defeated...")
+        exit()
+    elif enemy.hp <= 0:
+        timeprint(f"You defeated the {enemy.name}.")
+        moneygain = enemy.goldreward
+        xpgain= enemy.xpreward
+        timeprint(f"You earned ${moneygain} and {xpgain} XP.")
+        you.moneys += moneygain
+        you.moneys = round(you.moneys,2)
+        you.xp += xpgain
+
+    return you
 def bosscombat(enemy):
     pass
