@@ -1,4 +1,6 @@
 from base_functions import *
+from enemy import *
+from combat import *
 
 def explore(you):
     timeprint("You decide to go exploring.")
@@ -16,9 +18,13 @@ def explore(you):
         you.money /= 2
     elif seed < 0.1:
         #powerful enemy
-        pass
+        enemy = generate_enemy(you,1.5)
+        timeprint("You stumble upon an old camp.")
+        timeprint("There are signs of fighting and dried blood.")
+        timeprint(f"Suddenly, a {enemy.name} bursts out of the forest and ambushes you!")
+        combat(you,enemy)
     elif seed < 0.15:
-        #nothing
+        #dungeon entrance
         pass
     elif seed < 0.2:
         #toe stubbage
@@ -30,8 +36,18 @@ def explore(you):
         #training
         pass
     elif seed < 0.5:
-        #regular enemy
-        pass
+        enemy = generate_enemy(you)
+        enemy2 = enemy
+        enemy3 = enemy
+        timeprint("You are traveling through the forest.")
+        timeprint(f"There's a group of enemies up ahead.")
+        timeprint(f"There seems to be a {enemy.name}, an {enemy2.name}, and an {enemy3.name}.")
+        timeprint(f"You decide to take them on one by one.")
+        combat(you,enemy)
+        combat(you,enemy2)
+        combat(you,enemy3)
+        timeprint("Exhausted, you find a chest in the center of the camp.")
+        #chest here
     elif seed < 0.6:
         #shop
         pass
